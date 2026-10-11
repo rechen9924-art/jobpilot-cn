@@ -70,6 +70,11 @@
       "items": ["Linux", "Git", "英语（可读技术文档）"]
     }
   ],
+  "interests": [
+    "业余航拍与无人机飞行",
+    "长跑（半程马拉松完赛）",
+    "技术博客写作"
+  ],
   "extra": {
     "certificates": ["（示例）AWS Solutions Architect Associate"],
     "languages": ["英语 CET-6"],

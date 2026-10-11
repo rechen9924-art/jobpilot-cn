@@ -98,6 +98,13 @@ const coreHtml = (data.core_capabilities || [])
   .map((c) => `<span class="core-tag">${esc(c)}</span>`)
   .join('');
 
+const interestsBlock =
+  Array.isArray(data.interests) && data.interests.length
+    ? `<h2>兴趣与特长</h2><div class="interests">${data.interests
+        .map((x) => esc(x))
+        .join('　·　')}</div>`
+    : '';
+
 const html = tpl
   .replace('{{NAME}}', esc(name))
   .replace('{{TITLE}}', esc(title))
@@ -107,7 +114,8 @@ const html = tpl
   .replace('{{EXPERIENCE}}', expHtml)
   .replace('{{PROJECTS}}', projHtml)
   .replace('{{EDUCATION}}', eduHtml)
-  .replace('{{SKILLS}}', skillHtml);
+  .replace('{{SKILLS}}', skillHtml)
+  .replace('{{INTERESTS}}', interestsBlock);
 
 fs.writeFileSync(outHtml, html, 'utf-8');
 console.log('✅ HTML 已生成:', outHtml);

@@ -132,6 +132,11 @@
         }
       }
     },
+    "interests": {
+      "type": "array",
+      "description": "兴趣爱好 / 软资产（可选，但强烈建议填）。普通使用者往往想不到要写，而这恰恰是转行或弱相关经历的'救命素材'——例如：攀岩→抗压·目标感·专注；抖音自剪→短视频内容创作；玩无人机→直接命中求职方向。agent 在 intake 阶段应主动挖掘并举例点出'这也算'，拿到后将其'迁移价值'路由进 core_capabilities / summary / skills（见 x-intake-coaching）。本字段仅原样存原始爱好，不直接当成果。",
+      "items": { "type": "string" }
+    },
     "extra": {
       "type": "object",
       "description": "附加信息（可选，结构开放，承载证书/语言/获奖等）",
@@ -147,6 +152,15 @@
     "modeA_normalize": "用户自带简历 → 解析/抽取 → 归一化进本 schema（字段缺失则标记待补） → 校验 → 存为用户真源。",
     "modeB_guided": "把本 schema 的 required 字段作为引导表单发给用户逐项填写 → 填完即为基础稿真源。",
     "shared_hub": "两种模式殊途同归：都产出一份符合本 schema 的真源文件；后续派生/模板/评分均基于它。"
+  },
+  "x-intake-coaching": {
+    "purpose": "把 intake 从'被动填表器'升级为'简历教练访谈'。用户（尤其非技术 / 非 HR 背景）看不懂 core_capabilities / summary / STAR 等术语，必须用大白话 + 例子引导；且必须主动挖掘用户想不到的素材。详见 modes/_writing.md 与 modes/pdf.md 的白话 intake。",
+    "plain_language": "发给用户的填表 / 提问一律用大白话：'你最拿手的几样本事'而非 core_capabilities、'你工作过的地方'而非 experience、'你牵头做成的一件事'而非 projects。每个模糊栏目配 2–3 个看得懂的例子（尤其项目经历与兴趣爱好）。",
+    "dynamic_probing": "不是发一张静态骨架等填完，而是基于已填内容动态追问：每加一段经历，追问数字 context（个人 / 团队口径？排前几？）、弱动词升级（'负责'→'主导 / 搭建'）、以及'还有没有更亮眼的成果'。",
+    "achievement_mining": "主动问：最骄傲 / 最有成就感的事？最难处理的一次？一次超额完成？这些常是用户忽略的可写故事。",
+    "soft_asset_mining": "主动问爱好、运动、社团、志愿、副业、带人 / 培训经历——对转行或弱相关经历是桥接素材，用户想不到，须由 agent 举例子点出'这也算'。",
+    "summary_recalc": "任何经历 / 项目 / 技能的增删之后，必须重派生 summary，用最新最强数字与桥接人设，禁止 stale summary（旧弱数字残留）。",
+    "direction_match": "求职意向确定后持续检查经历是否支撑该方向；若不支撑，主动给出桥接话术（如'销售沟通力 + 证书 → 无人机教练'），绝不闷头填表。"
   },
   "x-derivation": {
     "principle": "派生不改事实，只改呈现：重排顺序、调整权重、换标题/人设、筛选相关条目。严禁在派生过程中新增未经验证的事实。",

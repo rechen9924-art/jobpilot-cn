@@ -218,6 +218,13 @@ def build(cv, out_path):
             add_runs(p, f"【{cat}】 ", size=10.5, bold=True, color=ACCENT)
             add_runs(p, "　·　".join(items), size=10.5)
 
+    # ---- 兴趣与特长 ----
+    if cv.get("interests"):
+        section_heading(doc, "兴趣与特长")
+        ip = doc.add_paragraph()
+        ip.paragraph_format.space_after = Pt(4)
+        add_runs(ip, "　·　".join(cv["interests"]), size=10.5)
+
     doc.save(out_path)
     print("✅ Word 简历已生成:", out_path)
 
