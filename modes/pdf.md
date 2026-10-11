@@ -1,14 +1,16 @@
-# 简历 PDF 生成（jobpilot-cn）
+# 简历导出（jobpilot-cn）
 
-本文件规定如何把简历数据渲染为中文 PDF。
+本文件规定如何把简历数据导出为成品。**默认交付可编辑 Word（.docx）**（用户拿去小改最方便、ATS 解析也稳）；需要像素级排版 PDF 时，用 `scripts/render-pdf.mjs` 一键导出。
+
+> **约束**：模板与脚本**不得包含或注入**任何工具署名 / 生成声明 / 版权水印。详见 SKILL.md「产物约束（硬性规则，写死）」。
 
 ---
 
-## 流程
+## 流程（默认出 docx）
 
 1. **准备数据**：把定制后的简历写成 JSON（字段见下），或 AI 直接生成。
-2. **注入模板**：`scripts/build-cv.mjs` 读取 JSON + 指定模板（`templates/cv-zh-minimal.html` 或 `templates/cv-zh-modern.html`），输出 `output/<name>.html`。
-3. **转 PDF**：`scripts/render-pdf.mjs` 用 Playwright 打开 HTML，打印为 A4 PDF 到 `output/<name>.pdf`。
+2. **生成可编辑 Word**：`scripts/build-cv-docx.py <简历.json> <output/<name>.docx> [--minimal|--modern]` 直接产出单栏、微软雅黑、ATS 安全的 .docx（无需浏览器依赖）。支持两种风格——`--minimal`（默认，深蓝灰、克制）与 `--modern`（青色强调、现代感）；**agent 交付前只问用户选哪种，不再询问是否出 PDF**。
+3. **（仅用户主动要求时）导出 PDF**：PDF 不是默认交付，agent 不主动询问；若用户明确要 PDF，先用 `scripts/build-cv.mjs` 注入模板生成 `output/<name>.html`，再用 `scripts/render-pdf.mjs` 打印为 A4 PDF。
 
 > **约束**：模板与脚本**不得包含或注入**任何工具署名 / 生成声明 / 版权水印（如“由 jobpilot-cn 生成”“内容基于本人真实经历”等）。详见 SKILL.md「产物约束（硬性规则，写死）」。
 
@@ -24,16 +26,16 @@ node scripts/render-pdf.mjs output/<name>.html output/<name>.pdf
 ```
 【你是谁】
 名字：
-想找什么样的工作（一句话，比如：无人机教练 / 销售 / 行政）：
+想找什么样的工作（一句话，比如：行政 / 销售 / 教师 / 程序员）：
 手机号：
 邮箱：
 所在城市：
 （可选）有没有个人主页 / 作品集链接：
 
 【用两三句话介绍下你自己】
-（你是干啥的、最擅长什么、想往哪个方向走。比如：外向开朗、沟通强，有无人机机长证和教练证，想做无人机教练。）
+（你是干啥的、最擅长什么、想往哪个方向走。比如：性格外向、沟通强，做过两年销售，想往行政方向走。）
 
-【你最拿手的几样本事】（写 6–10 条短话，比如：会开无人机、嘴皮子利索、有某个证、干活麻利、会带人）
+【你最拿手的几样本事】（写 6–10 条短话，比如：嘴皮子利索、干活麻利、有某个证、会做表格、会带人）
 1.
 2.
 …
@@ -78,12 +80,12 @@ node scripts/render-pdf.mjs output/<name>.html output/<name>.pdf
 说明：爱好可能正好是你求职方向要的，说出来我帮你判断放哪块。例子：
   · 爱攀岩 → 说明你抗压、有目标感；
   · 爱拍抖音、自己剪辑 → 说明你会短视频内容创作；
-  · 玩无人机、航拍 → 直接命中无人机相关方向；
+  · 会摄影、做视频剪辑 → 命中内容创作 / 新媒体方向；
   · 写过公众号、搞过副业、带过社团 / 志愿 → 都算。
 爱好 / 副业（随便写，我来帮你判断价值）：
 ```
 
-> 用户填完发回来，agent 按 `schema/resume.schema.json` 整理成 JSON 真源（见下）。**整理时把爱好做"迁移价值路由"**：攀岩 → 抗压·目标感（进核心能力），抖音自剪 → 短视频创作（进技能），玩无人机 → 进项目 / 技能。`interests` 字段原样存原始爱好。
+> 用户填完发回来，agent 按 `schema/resume.schema.json` 整理成 JSON 基础稿（见下）。**整理时把爱好做"迁移价值路由"**：攀岩 → 抗压·目标感（进核心能力），抖音自剪 → 短视频创作（进技能），摄影 / 剪辑 → 进项目 / 技能。`interests` 字段原样存原始爱好。
 
 ## 数据 JSON 字段（schema，agent 视角）
 
@@ -131,12 +133,13 @@ node scripts/render-pdf.mjs output/<name>.html output/<name>.pdf
 
 ## 输出目录
 
-- **PDF / HTML**：`output/`
+- **默认交付（可编辑）**：`output/<name>.docx`（由 `scripts/build-cv-docx.py` 生成）
+- **PDF 按需导出**：`output/<name>.pdf` + `output/<name>.html`（`scripts/render-pdf.mjs` 一键导出，像素级排版）
 - **简历源 JSON / 评估报告 / 追踪表**：`data/`
 
 ## 版本管理
 
-- 基础稿：`data/cv-base.json`（简历真源）+ 对应 PDF；可选维护 `data/cv-base.md` 人工可读副本
+- 基础稿：`data/cv-base.json`（简历基础稿）+ 对应 PDF；可选维护 `data/cv-base.md` 人工可读副本
 - 定制稿：`data/cv-公司-岗位.json` 与同名 PDF
 - 每次改稿生成**新文件**（带版本号或公司名），不覆盖历史
 - 投递日期与所用简历登记到 `data/applications.md`（含「简历附件」列，防发错定制简历）

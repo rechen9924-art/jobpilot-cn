@@ -16,7 +16,7 @@ const tpl = fs.readFileSync(tplPath, 'utf-8');
 const esc = (s) =>
   String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-// 兼容三种 JSON 结构：扁平字段 / 嵌套 candidate / 嵌套 basics（schema 真源用 basics）
+// 兼容三种 JSON 结构：扁平字段 / 嵌套 candidate / 嵌套 basics（schema 基础稿用 basics）
 const cand = data.candidate || data.basics || {};
 const pick = (k) => (data[k] !== undefined ? data[k] : cand[k]);
 const name = pick('name') || '';

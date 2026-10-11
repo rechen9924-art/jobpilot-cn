@@ -1,4 +1,4 @@
-// 一键出文件：JSON（真源）→ HTML → PDF → DOCX
+// 一键出文件：JSON（基础稿）→ HTML → PDF → DOCX
 // 用法：
 //   node scripts/export-cv.mjs <input.json> <outputName> [template]
 //   template 可选：templates/cv-zh-minimal.html（默认）| templates/cv-zh-modern.html

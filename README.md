@@ -1,5 +1,7 @@
 # jobpilot-cn（求职流·国内）
 
+> English version: [README.en.md](./README.en.md)
+
 一个**本地优先、零数据上传**的国内求职 AI Skill。把任意 AI 编程 CLI 变成你的求职指挥中心：粘贴 JD → 评估匹配 → 定制中文简历 → 生成触达话术 → 追踪投递。
 
 > 本项目为独立实现的求职辅助工具，采用 MIT 协议开源。
@@ -37,8 +39,8 @@ npm install
 pip install python-docx   # 生成 Word（.docx）时需要
 cp config/profile.example.yml config/profile.yml   # 必填：你的画像
 cp config/portals.example.yml config/portals.yml   # 选填：职位发现
-# 用 JSON 写简历真源：data/cv-base.json（字段契约见 schema/resume.schema.json，可从 schema/example-cv.json 复制起步）
-# 可选：再维护一份 data/cv-base.md 人工可读副本（非真源，仅备份/对照用）
+# 用 JSON 写简历基础稿：data/cv-base.json（字段契约见 schema/resume.schema.json，可从 schema/example-cv.json 复制起步）
+# 可选：再维护一份 data/cv-base.md 人工可读副本（非基础稿，仅备份/对照用）
 ```
 
 ## 常用命令（在 AI CLI 中触发）
@@ -46,7 +48,7 @@ cp config/portals.example.yml config/portals.yml   # 选填：职位发现
 | 命令 | 作用 |
 |------|------|
 | `/jobpilot-cn oferta <JD>` | 评估一个 JD（A–H 框架） |
-| `/jobpilot-cn pdf` | 由 `data/cv-base.json` 真源生成中文 PDF / Word 简历 |
+| `/jobpilot-cn pdf` | 由 `data/cv-base.json` 基础稿生成中文 PDF / Word 简历 |
 | `/jobpilot-cn contacto-cn <渠道/场景>` | 生成触达话术草稿 |
 | `/jobpilot-cn tracker` | 查看投递追踪表 |
 

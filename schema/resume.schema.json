@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://jobpilot-cn/schema/resume.schema.json",
   "title": "通用中文简历字段集 (Universal Resume Schema)",
-  "description": "求职 skill 的通用数据枢纽。简历真源、两种 intake 模式（自带/引导）、方向派生、模板渲染、ATS 兼容性（渲染兜底）全部基于此结构。本文件不含任何个人数据，只定义结构。",
+  "description": "求职 skill 的通用数据枢纽。简历基础稿、两种 intake 模式（自带/引导）、方向派生、模板渲染、ATS 兼容性（渲染兜底）全部基于此结构。本文件不含任何个人数据，只定义结构。",
   "type": "object",
   "required": ["basics", "summary", "core_capabilities", "experience", "skills"],
   "additionalProperties": false,
@@ -134,7 +134,7 @@
     },
     "interests": {
       "type": "array",
-      "description": "兴趣爱好 / 软资产（可选，但强烈建议填）。普通使用者往往想不到要写，而这恰恰是转行或弱相关经历的'救命素材'——例如：攀岩→抗压·目标感·专注；抖音自剪→短视频内容创作；玩无人机→直接命中求职方向。agent 在 intake 阶段应主动挖掘并举例点出'这也算'，拿到后将其'迁移价值'路由进 core_capabilities / summary / skills（见 x-intake-coaching）。本字段仅原样存原始爱好，不直接当成果。",
+      "description": "兴趣爱好 / 软资产（可选，但强烈建议填）。普通使用者往往想不到要写，而这恰恰是转行或弱相关经历的'救命素材'——例如：攀岩→抗压·目标感·专注；抖音自剪→短视频内容创作；摄影 / 剪辑→内容创作方向。agent 在 intake 阶段应主动挖掘并举例点出'这也算'，拿到后将其'迁移价值'路由进 core_capabilities / summary / skills（见 x-intake-coaching）。本字段仅原样存原始爱好，不直接当成果。",
       "items": { "type": "string" }
     },
     "extra": {
@@ -149,9 +149,9 @@
     }
   },
   "x-intake": {
-    "modeA_normalize": "用户自带简历 → 解析/抽取 → 归一化进本 schema（字段缺失则标记待补） → 校验 → 存为用户真源。",
-    "modeB_guided": "把本 schema 的 required 字段作为引导表单发给用户逐项填写 → 填完即为基础稿真源。",
-    "shared_hub": "两种模式殊途同归：都产出一份符合本 schema 的真源文件；后续派生/模板/评分均基于它。"
+    "modeA_normalize": "用户自带简历 → 解析/抽取 → 归一化进本 schema（字段缺失则标记待补） → 校验 → 存为用户基础稿。",
+    "modeB_guided": "把本 schema 的 required 字段作为引导表单发给用户逐项填写 → 填完即为基础稿。",
+    "shared_hub": "两种模式殊途同归：都产出一份符合本 schema 的基础稿文件；后续派生/模板/评分均基于它。"
   },
   "x-intake-coaching": {
     "purpose": "把 intake 从'被动填表器'升级为'简历教练访谈'。用户（尤其非技术 / 非 HR 背景）看不懂 core_capabilities / summary / STAR 等术语，必须用大白话 + 例子引导；且必须主动挖掘用户想不到的素材。详见 modes/_writing.md 与 modes/pdf.md 的白话 intake。",
@@ -160,7 +160,7 @@
     "achievement_mining": "主动问：最骄傲 / 最有成就感的事？最难处理的一次？一次超额完成？这些常是用户忽略的可写故事。",
     "soft_asset_mining": "主动问爱好、运动、社团、志愿、副业、带人 / 培训经历——对转行或弱相关经历是桥接素材，用户想不到，须由 agent 举例子点出'这也算'。",
     "summary_recalc": "任何经历 / 项目 / 技能的增删之后，必须重派生 summary，用最新最强数字与桥接人设，禁止 stale summary（旧弱数字残留）。",
-    "direction_match": "求职意向确定后持续检查经历是否支撑该方向；若不支撑，主动给出桥接话术（如'销售沟通力 + 证书 → 无人机教练'），绝不闷头填表。"
+    "direction_match": "求职意向确定后持续检查经历是否支撑该方向；若不支撑，主动给出桥接话术（如'销售沟通力 + 证书 → 行政 / 文职方向'），绝不闷头填表。"
   },
   "x-derivation": {
     "principle": "派生不改事实，只改呈现：重排顺序、调整权重、换标题/人设、筛选相关条目。严禁在派生过程中新增未经验证的事实。",
