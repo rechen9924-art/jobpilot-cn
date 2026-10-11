@@ -1,0 +1,78 @@
+{
+  "basics": {
+    "name": "（示例）张三",
+    "title": "求职意向：后端开发 · 云原生 · 高并发",
+    "phone": "138 0000 0000",
+    "email": "example@mail.com",
+    "wechat": "",
+    "location": "广东 深圳",
+    "links": ["github.com/example", "example.blog"]
+  },
+  "summary": "3 年后端开发经验，主导过订单系统重构，核心接口 P99 延迟从 800ms 降至 120ms；熟悉 Go / Kubernetes / 消息队列，能把业务痛点沉淀为可复用基建。",
+  "core_capabilities": [
+    "高并发后端服务设计与优化",
+    "云原生（Kubernetes / 容器化）落地",
+    "分布式系统拆分与治理",
+    "可观测性（监控 / 告警 / 链路追踪）建设",
+    "CI/CD 流水线搭建",
+    "英语可读技术文档"
+  ],
+  "experience": [
+    {
+      "company": "（示例）某科技有限公司",
+      "role": "后端工程师",
+      "dates": "2023.03 – 2025.06",
+      "location": "深圳",
+      "bullets": [
+        "主导订单系统重构，将核心接口 P99 延迟从 800ms 降至 120ms，大促零事故。",
+        "搭建基于 Kubernetes 的滚动发布流水线，发布失败率下降 70%。",
+        "推动核心服务拆分与接口治理，支撑峰值 1.2w QPS 平稳运行。"
+      ]
+    },
+    {
+      "company": "（示例）某互联网公司",
+      "role": "初级后端开发",
+      "dates": "2021.07 – 2023.02",
+      "location": "深圳",
+      "bullets": [
+        "负责用户中心模块开发与维护，支撑日均千万级调用。",
+        "参与慢查询治理，关键接口平均耗时下降 45%。"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "org": "（示例）某大学",
+      "title": "本科 · 计算机科学与技术",
+      "year": "2017.09 – 2021.06",
+      "note": ""
+    }
+  ],
+  "projects": [
+    {
+      "name": "（示例）内部监控告警平台（独立 0→1）",
+      "role": "独立开发",
+      "tech": ["Go", "Prometheus", "Grafana", "Kubernetes"],
+      "description": "针对告警噪音大、定位慢的痛点，设计并实现一站式监控告警平台。独立完成采集 agent 与告警引擎；采用 Prometheus 拉模型保证数据一致性。结果：待补充。"
+    }
+  ],
+  "skills": [
+    {
+      "category": "后端与架构",
+      "items": ["Go", "微服务", "Kubernetes", "消息队列", "高并发设计"]
+    },
+    {
+      "category": "数据与工程",
+      "items": ["MySQL", "Redis", "Prometheus", "CI/CD"]
+    },
+    {
+      "category": "工具与语言",
+      "items": ["Linux", "Git", "英语（可读技术文档）"]
+    }
+  ],
+  "extra": {
+    "certificates": ["（示例）AWS Solutions Architect Associate"],
+    "languages": ["英语 CET-6"],
+    "awards": []
+  }
+}

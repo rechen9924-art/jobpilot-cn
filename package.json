@@ -1,0 +1,17 @@
+{
+  "name": "jobpilot-cn",
+  "version": "1.0.0",
+  "description": "国内求职 AI Skill：JD 评估 + 中文简历定制 + 触达话术 + 投递追踪",
+  "type": "module",
+  "scripts": {
+    "build-cv": "node scripts/build-cv.mjs",
+    "render-pdf": "node scripts/render-pdf.mjs",
+    "demo:minimal": "node scripts/build-cv.mjs schema/example-cv.json output/example-minimal.html templates/cv-zh-minimal.html && node scripts/render-pdf.mjs output/example-minimal.html output/example-minimal.pdf",
+    "demo:modern": "node scripts/build-cv.mjs schema/example-cv.json output/example-modern.html templates/cv-zh-modern.html && node scripts/render-pdf.mjs output/example-modern.html output/example-modern.pdf",
+    "export:cv": "node scripts/export-cv.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.63.0"
+  }
+}

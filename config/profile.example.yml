@@ -1,0 +1,49 @@
+# jobpilot-cn 用户求职画像（示例）
+# 用法：复制本文件为 config/profile.yml，填写你自己的信息。
+# 本文件永不被自动更新；系统先读 _shared.md（通用规则），再读本文件（你的覆盖）。
+
+candidate:
+  full_name: "示例 张三"
+  # 简历标题，随 JD 调整（如“AI 流程自动化专员”）。不夸大。
+  title: "产品经理"
+  email: "zhangsan@example.com"
+  phone: "13800000000"
+  # 选填：用于 BOSS / 微信触达；留空则不显示
+  wechat: "zhangsan_wx"
+  location:
+    city: "上海"            # 期望工作城市
+    flexible: false         # 是否接受异地调动
+
+target_roles:
+  # 社招：写具体岗位
+  primary:
+    - "产品经理"
+    - "产品运营"
+  # 校招 / 应届：写这里（社招可留空）
+  campus:
+    - "管培生"
+    - "储备干部"
+
+compensation:
+  target_range: "20K-30K/月"   # 期望薪资
+  currency: "CNY"
+  minimum: "18K/月"            # 底线
+  structure: "底薪+绩效，期望13薪"   # 构成说明
+
+culture_screen:
+  require:                    # 必须满足的
+    - "双休"
+    - "不接受大小周"
+  reject:                     # 一票否决的
+    - "频繁无补偿加班"
+
+location_policy:
+  accept_remote: false
+  accept_travel: "偶尔出差可接受"
+
+language:
+  output: "zh-CN"             # 简历与评估语言
+
+narrative:
+  # 你的职业叙事：过去经历如何接到目标岗位（“为什么是你”）
+  exit_story: "从业务执行转向产品/运营，擅长把复杂业务抽象为可落地方案"

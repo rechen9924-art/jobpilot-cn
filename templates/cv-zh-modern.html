@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Heiti SC", sans-serif;
+    color: #1f2937; font-size: 12.5px; line-height: 1.6;
+    display: flex; min-height: 297mm;
+  }
+
+  /* ===== 左侧浅色侧栏 ===== */
+  .sidebar {
+    width: 33%; background: #eef2f7; color: #334155;
+    padding: 26px 20px;
+  }
+  .sidebar .name { font-size: 23px; font-weight: 700; color: #0f172a; letter-spacing: 1px; }
+  .sidebar .title { font-size: 13px; color: #1d4ed8; margin-top: 5px; font-weight: 600; }
+  .sidebar .contact { margin-top: 16px; font-size: 11.5px; }
+  .sidebar .contact span { display: block; margin: 6px 0; white-space: normal; color: #475569; }
+  .sidebar h2 {
+    font-size: 11.5px; letter-spacing: 1.5px; color: #1d4ed8;
+    border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin: 20px 0 10px;
+  }
+  .sidebar .skills-row { margin-bottom: 7px; font-size: 11.5px; color: #475569; }
+  .sidebar .skills-cat { color: #0f172a; font-weight: 600; }
+  .sidebar .item { margin-bottom: 9px; font-size: 11.5px; }
+  .sidebar .item-head { font-weight: 600; color: #0f172a; font-size: 12px; }
+  .sidebar .item-head .right { color: #64748b; font-weight: 400; font-size: 11px; }
+
+  /* ===== 右侧主栏 ===== */
+  .main { width: 67%; padding: 26px 30px; }
+  .main h2 {
+    font-size: 14px; font-weight: 700; color: #0f172a;
+    border-left: 4px solid #38bdf8; padding-left: 9px; margin: 16px 0 9px;
+  }
+  .main .summary { text-align: justify; color: #334155; }
+  .main .item { margin-bottom: 11px; page-break-inside: avoid; }
+  .main .item-head { display: flex; justify-content: space-between; font-weight: 600; color: #0f172a; }
+  .main .item-head .right { color: #64748b; font-weight: 400; font-size: 11.5px; }
+  .main .item-sub { color: #475569; font-size: 11.5px; margin: 2px 0 4px; }
+  .main .item-desc { color: #475569; font-size: 11.5px; margin: 3px 0 5px; text-align: justify; }
+  .main .item ul { margin-left: 16px; }
+  .main .item ul li { margin-bottom: 2px; font-size: 12px; color: #334155; }
+  .main .skills-row { margin-bottom: 4px; }
+  .main .skills-cat { font-weight: 600; color: #0f172a; }
+  .core-capabilities { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .core-tag {
+    background: #eef6ff; color: #1d4ed8;
+    border-radius: 4px; padding: 3px 10px;
+    font-size: 11.5px; display: inline-block;
+  }
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="name">{{NAME}}</div>
+    <div class="title">{{TITLE}}</div>
+    <div class="contact">{{CONTACT}}</div>
+
+    <h2>专业技能 / SKILLS</h2>
+    <div class="skills">{{SKILLS}}</div>
+
+    <h2>教育背景 / EDU</h2>
+    <div class="education">{{EDUCATION}}</div>
+  </div>
+
+  <div class="main">
+    <h2>个人总结 / PROFILE</h2>
+    <div class="summary">{{SUMMARY}}</div>
+
+    <h2>核心能力 / CORE</h2>
+    <div class="core-capabilities">
+      {{CORE}}
+    </div>
+
+    <h2>工作经历 / EXPERIENCE</h2>
+    {{EXPERIENCE}}
+
+    <h2>项目经历 / PROJECTS</h2>
+    {{PROJECTS}}
+  </div>
+</body>
+</html>

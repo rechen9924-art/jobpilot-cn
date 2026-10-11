@@ -1,0 +1,198 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://jobpilot-cn/schema/resume.schema.json",
+  "title": "通用中文简历字段集 (Universal Resume Schema)",
+  "description": "求职 skill 的通用数据枢纽。简历真源、两种 intake 模式（自带/引导）、方向派生、模板渲染、ATS 兼容性（渲染兜底）全部基于此结构。本文件不含任何个人数据，只定义结构。",
+  "type": "object",
+  "required": ["basics", "summary", "core_capabilities", "experience", "skills"],
+  "additionalProperties": false,
+  "properties": {
+    "basics": {
+      "type": "object",
+      "description": "基本信息。模式B 必填 name/title/phone/email/location；wechat 与 links 可选。",
+      "required": ["name", "title", "phone", "email", "location"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "title": {
+          "type": "string",
+          "description": "求职意向 / 一句话定位。支持方向派生：可含方向权重，如 'AI 业务自动化 · 外贸智能化 · 海外获客'（顺序即权重）。"
+        },
+        "phone": {
+          "type": "string",
+          "description": "手机号（格式自由，可带空格便于阅读，如 '138 0000 0000'）"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "邮箱"
+        },
+        "wechat": {
+          "type": "string",
+          "description": "微信号（可选；涉及隐私，谨慎填写或留空）"
+        },
+        "location": {
+          "type": "string",
+          "description": "所在地，如 '浙江 温州'"
+        },
+        "links": {
+          "type": "array",
+          "description": "可选：个人网站 / 领英 / 作品集 / GitHub 等",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "description": "个人简介（2-4 句）。模式B 要求含至少 1 个可量化亮点；方向派生时可重述人设，但不得虚构。"
+    },
+    "core_capabilities": {
+      "type": "array",
+      "description": "核心能力摘要（6–8 条短语，放在个人总结下方）。作用：HR 数秒扫读时一眼命中人设标签、快速匹配 JD 关键词；与 skills 的详细分类清单区分（summary=人设故事，core_capabilities=核心标签，skills=分类详单）。派生时可按方向筛选/重排，不虚构。",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": { "type": "string" }
+    },
+    "experience": {
+      "type": "array",
+      "description": "工作经历（建议倒序）。每条至少 1 条 bullet。派生时可重排条目顺序、筛选/重排 bullet。",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["company", "role", "dates", "bullets"],
+        "additionalProperties": false,
+        "properties": {
+          "company": { "type": "string", "description": "公司名" },
+          "role": { "type": "string", "description": "职位" },
+          "dates": { "type": "string", "description": "起止时间，如 '2026.03 – 2026.07'" },
+          "location": { "type": "string", "description": "工作地（可选）" },
+          "bullets": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" },
+            "description": "成就句（STAR + 量化优先）。派生时可重排/筛选。"
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "description": "教育背景（建议倒序）。可选但建议填。",
+      "items": {
+        "type": "object",
+        "required": ["org", "title", "year"],
+        "additionalProperties": false,
+        "properties": {
+          "org": { "type": "string", "description": "学校/机构" },
+          "title": { "type": "string", "description": "学历/专业，如 '专科 · 国际经济与贸易'" },
+          "year": { "type": "string", "description": "起止时间" },
+          "note": { "type": "string", "description": "备注（可选，如 GPA/主修课程）" }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "description": "项目经历（独立交付物，区别于任职内职责）。可选；量化结果可暂空。派生时可作为佐证某方向的材料前置。",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "description": "项目名（建议标注角色，如 '（独立 0→1 开发）'）" },
+          "role": { "type": "string", "description": "角色，如 '独立开发' / '主导' / '核心成员'（可选）" },
+          "tech": {
+            "type": ["string", "array"],
+            "description": "技术栈。派生时只保留真实用过的，不夸大。"
+          },
+          "description": {
+            "type": "string",
+            "description": "背景→动作→结果。结果段落可暂空，待补充。"
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "技能（按分类组织）。至少 1 类。派生时可重排分类顺序、调整归类、针对方向增删。",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["category", "items"],
+        "additionalProperties": false,
+        "properties": {
+          "category": { "type": "string", "description": "分类名，如 '外贸与跨境' / 'AI 与自动化'" },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "extra": {
+      "type": "object",
+      "description": "附加信息（可选，结构开放，承载证书/语言/获奖等）",
+      "additionalProperties": true,
+      "properties": {
+        "certificates": { "type": "array", "items": { "type": "string" }, "description": "证书" },
+        "languages": { "type": "array", "items": { "type": "string" }, "description": "语言能力" },
+        "awards": { "type": "array", "items": { "type": "string" }, "description": "获奖" }
+      }
+    }
+  },
+  "x-intake": {
+    "modeA_normalize": "用户自带简历 → 解析/抽取 → 归一化进本 schema（字段缺失则标记待补） → 校验 → 存为用户真源。",
+    "modeB_guided": "把本 schema 的 required 字段作为引导表单发给用户逐项填写 → 填完即为基础稿真源。",
+    "shared_hub": "两种模式殊途同归：都产出一份符合本 schema 的真源文件；后续派生/模板/评分均基于它。"
+  },
+  "x-derivation": {
+    "principle": "派生不改事实，只改呈现：重排顺序、调整权重、换标题/人设、筛选相关条目。严禁在派生过程中新增未经验证的事实。",
+    "intent": "派生的唯一输入是用户自由填写的投递意图（目标岗位 / 行业 / 方向词 / 看重的能力）。skill 不内置任何预设方向枚举（如 'AI 版' / '外贸版'），也不把某类方向写死为模板——使用者想投什么，就由他输入的意图驱动。",
+    "operation": "固定变换操作集（与意图解耦，结构本身不固定）：重排字段顺序、调整分类权重、重构 title/summary 的呈现、筛选/重排 bullet、前置相关项目。具体怎么动，由意图决定，而非枚举穷举。",
+    "controlled_fields": {
+      "title": "按投递方向重写方向词与顺序",
+      "summary": "可重述人设，但不得编造新数据",
+      "skills[].category": "按方向重排分类顺序、调整归类",
+      "experience[].bullets": "按方向重排/筛选 bullet",
+      "projects": "可前置最能佐证该方向的项目"
+    }
+  },
+  "x-ats-rendering": {
+    "purpose": "中文 ATS（如北森 / Moka / 钉钉招聘 / 智联·猎聘·BOSS 后台）靠读文本层解析简历、提取姓名/公司/技能/年限。本 skill 不做独立的 'ATS 评分模块'，而是把兼容性要求作为渲染兜底——生成 PDF / DOCX 时直接遵守，而非另写打分系统。",
+    "rules": [
+      "字体嵌入：中文 PDF 必须嵌入字体，避免换机乱码 / 缺字",
+      "正文承载：关键信息走正文文本流，不包进文本框或图片（VML / SVG 图形层 ATS 与正则均难稳定读取）",
+      "单栏优先：避免双栏排版导致 ATS 解析顺序错乱",
+      "优先 DOCX：中文招聘平台上传 Word 兼容性与渲染兜底最稳"
+    ],
+    "optional_notes": "照片 / 年龄 / 性别为中国简历传统项，但 ATS 硬解析不需要，且涉及就业歧视合规；仅作可选提示，不写死规则。"
+  },
+  "x-redlines": {
+    "no_fabrication": "不虚构经历、数据、技能。没有的数字不编；技术栈只写真实用过的。",
+    "no_self_attribution": "对外产物（PDF/Word）严禁工具署名、生成声明、版权水印。"
+  },
+  "x-writing-standards": {
+    "purpose": "把'怎么把真实经历改写成好简历'的硬标准写进数据契约，与 modes/_writing.md 同源。渲染/派生时所有文案必须遵守。",
+    "formula": "每条经历 bullet 用 '动作 + 对象 + 结果 + 数字'（即 STAR 量化）。例：'独立开发 30+ 海外客户，年回款 120 万，复购率 38%'。",
+    "strong_verbs": "优先强动词开头：搭建/设计/主导/落地/优化/提升/降低/实现/打通/推动/从 0 到 1/统筹/对接。禁用'负责/参与/协助'打头。",
+    "quantify": "每条 bullet 尽量带数字（金额/百分比/数量/时长/人数）；无数字用规模/范围/频率替代；缺失标注'待补充'，绝不编造。",
+    "align_jd": "派生时提取 JD 同款关键词/动词/职位名，自然嵌入并前置相关经历；不改事实，只调措辞/顺序/强调点。",
+    "one_page": "中文简历控制一页 A4（社招重结果、校招重实习/学校）；删冗余、合并同类、去掉无关内容。",
+    "taboos": "不写虚假公司/职位/业绩；不把团队成果写成个人独占；不用无法证实的超级lative（如'全国第一'）；技能如实标水平。"
+  },
+  "x-acceptance": {
+    "purpose": "简历质量的客观验收闸门（与 oferta.md 的 JD 适配度评分正交）。出文件前必须跑，详见 ACCEPTANCE.md。",
+    "dimensions": {
+      "content_match": "内容匹配 25 — JD 关键词/能力/行业对齐",
+      "impact_quant": "成果量化 25 — bullet 带数字、STAR 化",
+      "structure": "结构表达 20 — 单栏/标准标题/倒序/一页/可扫读",
+      "language": "语言精炼 15 — 强动词/无废话/时态一致",
+      "ats": "ATS 兼容 15 — 字体嵌入/文本层/无文本框承载/DOCX"
+    },
+    "tiers": "优秀 90–100 / 良好 75–89 / 及格 60–74 / 偏弱 <60（需重写）",
+    "gate": "总分 ≥75 且无真实性/ATS 硬伤方可出文件；<60 回第1步重做量化与匹配。"
+  }
+}
