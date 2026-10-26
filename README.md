@@ -33,7 +33,7 @@
 ## 安装与初始化
 
 ```bash
-git clone <你的仓库地址> jobpilot-cn
+git clone https://github.com/rechen9924-art/jobpilot-cn.git jobpilot-cn
 cd jobpilot-cn
 npm install
 pip install python-docx   # 生成 Word（.docx）时需要
@@ -118,6 +118,10 @@ node scripts/render-pdf.mjs <输出.html> <输出.pdf>
 ## 许可
 
 MIT 协议。详见 [`LICENSE`](./LICENSE)。本仓库不含任何第三方受版权保护的源码或文档。
+
+## 支持本项目
+
+如果这个工具帮你投出了更好的简历，欢迎到 [GitHub 点个 Star](https://github.com/rechen9924-art/jobpilot-cn)——你的 Star 能让「本地优先、零上传」的隐私方案被更多求职者看到。也欢迎提 Issue 反馈、提交 PR 一起完善。
 
 ---
 
